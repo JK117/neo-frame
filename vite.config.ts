@@ -22,6 +22,6 @@ export default defineConfig({
     open: true,
   },
   build: {
-    outDir: '../neo-frame'
+    outDir: '../neo-frame-dist'
   }
 })
