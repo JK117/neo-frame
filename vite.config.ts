@@ -12,7 +12,13 @@ export default defineConfig({
     }
   },
   plugins: [
-    vue(),
+    vue({
+      template: {
+        compilerOptions: {
+          // isCustomElement: (tag) => tag.includes('-')
+        }
+      }
+    }),
     Components({
       dts: 'src/components.d.ts',
       resolvers: [AntDesignVueResolver()]

@@ -1,13 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-const router = createRouter({
+const routes = [
+    {
+        path: '/',
+        redirect: '/menu'
+    },
+    {
+        path: '/menu',
+        name: 'menu',
+        component: () => import('@/views/FlexMenu.vue')
+    },
+    {
+        path: '/flow',
+        name: 'flow',
+        component: () => import('@/views/CardFlow.vue')
+    }
+]
+
+export const router = createRouter({
     history: createWebHistory(),
-    routes: [
-        // {
-        //     path: '/',
-        //     redirect: '/'
-        // },
-    ],
+    routes
 })
 
 export default router
