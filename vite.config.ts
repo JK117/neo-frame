@@ -21,7 +21,11 @@ export default defineConfig({
     }),
     Components({
       dts: 'src/components.d.ts',
-      resolvers: [AntDesignVueResolver()]
+      resolvers: [
+        AntDesignVueResolver({
+          resolveIcons: true,
+        })
+      ]
     })
   ],
   // css: {
