@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 // import { useRouter, useRoute } from 'vue-router';
 // Should use persistent stroage 
 import { navOptions } from '@/components/navigations/NavOptions'
@@ -10,7 +10,7 @@ const collapsed = ref(false)
 //     selectedKeys: [route.name] as string[],
 // })
 // const selectedKeys = ref([route.name])
-const selectedKeys = ref([navOptions[0].route])
+// const selectedKeys = ref([navOptions[0].route])
 // const state = reactive({
 //     matched: route.matched
 // })
@@ -37,13 +37,17 @@ const selectedKeys = ref([navOptions[0].route])
 //     console.log(key)
 //     // router.push(key)
 // }
+onMounted(() => {
+    console.log('onMounted: Sidebar')
+})
 </script>
 
 
 <template>
     <a-layout-sider collapsible v-model:collapsed="collapsed">
         <div class="app-logo"></div>
-        <a-menu theme="dark" mode="inline" v-model:selectedKeys="selectedKeys">
+        <!-- <a-menu theme="dark" mode="inline" v-model:selectedKeys="selectedKeys"> -->
+        <a-menu theme="dark" mode="inline">
             <!-- <a-menu-item
                 v-for="option in navOptions"
                 :key="option.route"
