@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
+import AutoImport from 'unplugin-auto-import/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -21,12 +22,21 @@ export default defineConfig({
     }),
     Components({
       dts: 'src/components.d.ts',
+      dirs: ['src/components','src/views'],
       resolvers: [
         AntDesignVueResolver({
           resolveIcons: true,
         })
       ]
-    })
+    }),
+    AutoImport({
+      include: [],
+      imports: [
+        'vue',
+        'vue-router',
+      ],
+      dts: 'src/auto-imports.d.ts'
+    }),
   ],
   // css: {
   //   preprocessorOptions: {
