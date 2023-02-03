@@ -4,6 +4,7 @@ import path from 'path'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
+import viteCompression from 'vite-plugin-compression';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -37,6 +38,9 @@ export default defineConfig({
       ],
       dts: 'src/auto-imports.d.ts'
     }),
+    viteCompression({
+      deleteOriginFile: true,
+    })
   ],
   // css: {
   //   preprocessorOptions: {
@@ -52,22 +56,5 @@ export default defineConfig({
   build: {
     outDir: '../neo-frame-dist',
     emptyOutDir: true,
-    rollupOptions: {
-      output:{
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-              return id.toString().split('node_modules/')[1].split('/')[0].toString();
-          }
-        },
-        chunkFileNames: (chunkInfo) => {
-          const facadeModuleId = chunkInfo.facadeModuleId
-            ? chunkInfo.facadeModuleId.split('/')
-            : [];
-          const fileName =
-            facadeModuleId[facadeModuleId.length - 2] || '[name]';
-          return `js/${fileName}/[name].[hash].js`;
-        }
-      }
-    },
   }
 })
